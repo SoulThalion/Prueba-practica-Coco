@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('role', ['Administrador','Project Manager','Miembro del Equipo'])->default('Miembro del Equipo');
             $table->timestamps();
+            $table->timestamp('email_verified_at')->nullable();
         });
         
     }
