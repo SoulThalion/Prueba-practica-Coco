@@ -6,6 +6,7 @@ import Users from "../pages/Users";
 import Clients from "../pages/Clients";
 import Orders from "../pages/Orders";
 import Landing from "../pages/Landing";
+import Register from "../pages/Register";
 
 const isAuthenticated = () => !localStorage.getItem('token') ? redirect("/landing") : null
 const isNotAuthenticated = () => localStorage.getItem('token') ? redirect("/") : null
@@ -15,6 +16,11 @@ const router = createBrowserRouter([
   {
     path: '/landing',
     element: <Landing />,
+    loader: isNotAuthenticated
+  },
+  {
+    path: '/register',
+    element: <Register />,
     loader: isNotAuthenticated
   },
   {

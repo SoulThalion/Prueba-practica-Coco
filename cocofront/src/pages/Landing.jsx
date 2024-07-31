@@ -1,6 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo_4.png";
 
 const Landing = () => {
+
+  const navigate = useNavigate();
+
+  const handleClickRegister = () => {
+    navigate('/register');
+  };
+
   return (
     <div className="lg:grid lg:grid-cols-2 h-screen">
       <div className="flex flex-col lg:justify-center pt-10 lg:p-0 items-center lg:h-screen">
@@ -18,12 +26,12 @@ const Landing = () => {
 
         <div className="bg-blue-500 rounded-3xl flex flex-col justify-center items-center lg:w-2/3 m-5 lg:m-0 p-10 gap-10 shadow-lg">
           <p className="text-white text-xl font-bold">Empieza hoy a crear proyectos que podrás organizar y compartir con tu equipo.</p>
-          <button className="bg-orange-400 rounded-lg w-full h-12 text-xl">¡Registrate!</button>
+          <button onClick={handleClickRegister} className="bg-orange-400 rounded-lg w-full h-12 text-xl">¡Registrate!</button>
         </div>
 
         <div className="bg-[#40c057] rounded-3xl flex flex-col justify-center items-center lg:w-2/3 m-5 lg:m-0 p-10 gap-10 shadow-lg">
           <p className="text-white text-xl font-bold">Continúa dónde lo dejaste, ponte al día y comunícate con tus compañeros/as, o crea nuevos proyectos.</p>
-          <button className="bg-blue-800 rounded-lg w-full h-12 text-white text-xl">¡Logueate!</button>
+          <button className="bg-blue-800 rounded-lg w-full h-12 text-white text-xl">¡Inicia sesión!</button>
         </div>
 
       </div>
