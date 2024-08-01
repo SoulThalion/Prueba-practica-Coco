@@ -100,9 +100,9 @@ export const getUserById = async (id) => {
     const token = localStorage.getItem('token');
     const ide = id
     try {
-        const { data } = await app.get(`/user/${ide}`, {
+        const { data } = await app.get(`/users/${ide}`, {
             headers: {
-                token: token // Incluir el token en el encabezado de autorización
+                Authorization: `Bearer ${token}`
             }
         });
 
