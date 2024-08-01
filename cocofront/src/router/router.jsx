@@ -24,6 +24,11 @@ const router = createBrowserRouter([
     loader: isNotAuthenticated
   },
   {
+    path: '/login',
+    element: <Login />,
+    loader: isNotAuthenticated
+  },
+  {
     path: '/',
     element: <Layout />,
     children: [
@@ -31,11 +36,6 @@ const router = createBrowserRouter([
         path: '/',
         element: <Home/>,
         loader: isAuthenticated,
-      },
-      {
-        path: '/login',
-        element: <Login />,
-        loader: isNotAuthenticated
       },
       {
         path: '/users',

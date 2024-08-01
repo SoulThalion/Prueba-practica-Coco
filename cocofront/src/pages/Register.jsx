@@ -1,6 +1,39 @@
+import { useContext, useState } from "react";
 import logo from "../assets/logo_4.png";
+import OpenEyeIcon from "../icons/OpenEyeIcon";
+import CloseEyeIcon from "../icons/CloseEyeIcon";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/userContext";
+import { signup } from "../services/auth.service";
 
 const Register = () => {
+
+    const navigate = useNavigate();
+
+  const { user, setUser } = useContext(UserContext);
+
+  const [userName, setUserName] = useState("");
+  const [userEmail, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isChecked, setChecked] = useState("");
+
+    const [isPassVisible, setIsPassVisible] = useState(false);
+
+    const handleRegister = async (e) => {
+        e.preventDefault();
+        if (userName && userEmail && password && isChecked) {
+            const res = await signup(userName, userEmail, password);
+            if (res) {
+                localStorage.setItem("token", res.access_token);
+                setUser(res.user);
+                navigate("/");
+            }
+          } else {
+            alert('Revisa la info pls!');
+          }
+      
+      };
+
   return (
     <div className="lg:grid lg:grid-cols-2 h-screen">
       <div className="flex flex-col lg:justify-center pt-10 lg:p-0 items-center lg:h-screen">
@@ -15,8 +48,8 @@ const Register = () => {
       </div>
 
       <div className="flex justify-center lg:justify-start lg:ml-10 items-center pt-10 lg:pt-0">
-        <div className="md:w-96 w-3/4 flex justify-center items-center py-10 bg-yellow-300 md:h-2/3 rounded-3xl">
-          <htmlForm className="max-w-sm mx-auto w-3/4">
+        <div className="md:w-96 w-3/4 flex justify-center items-center py-10 bg-yellow-300 md:h-2/3 rounded-3xl shadow-lg">
+          <form className="max-w-sm mx-auto w-3/4" onSubmit={handleRegister}>
           <div className="mb-5">
               <label
                 htmlFor="nombre"
@@ -25,7 +58,8 @@ const Register = () => {
                 Tu nombre
               </label>
               <input
-                type="password"
+                type="text"
+                onChange={(e) => setUserName(e.target.value)}
                 id="nombre"
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                 required
@@ -40,6 +74,7 @@ const Register = () => {
               </label>
               <input
                 type="email"
+                onChange={(e) => setEmail(e.target.value)}
                 id="email"
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                 placeholder="name@example.com"
@@ -53,8 +88,17 @@ const Register = () => {
               >
                 Tu contraseña
               </label>
+              <div className="relative">
+              <span
+                className="inline-flex absolute inset-y-5 end-0 items-center px-3 text-sm text-gray-900 rounded-s-md"
+                onClick={() => setIsPassVisible((oldState) => !oldState)}
+              >
+                {isPassVisible ? <OpenEyeIcon /> : <CloseEyeIcon />}
+              </span>
+            </div>
               <input
-                type="password"
+                type={isPassVisible ? "text" : "password"}
+                onChange={(e) => setPassword(e.target.value)}
                 id="password"
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                 required
@@ -66,6 +110,7 @@ const Register = () => {
                 <input
                   id="terms"
                   type="checkbox"
+                  onChange={() => setChecked(true)}
                   value=""
                   className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
                   required
@@ -90,7 +135,7 @@ const Register = () => {
             >
               Registrarme
             </button>
-          </htmlForm>
+          </form>
         </div>
       </div>
     </div>
