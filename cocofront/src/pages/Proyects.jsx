@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
-import { createProject, getAllProjects, updateProject } from "../services/project.service.js";
+import {
+  createProject,
+  getAllProjects,
+  updateProject,
+} from "../services/project.service.js";
 import { useContext } from "react";
 import { UserContext } from "../context/userContext.js";
 import ProjectCard from "../components/cards/ProjectCard.jsx";
 import PlusIcon from "../icons/PlusIcon.jsx";
 import toast from "react-hot-toast";
+import Task from "../components/Task.jsx";
 
 const Proyects = () => {
   const { user } = useContext(UserContext);
@@ -12,10 +17,11 @@ const Proyects = () => {
   const [newButton, setNewButton] = useState(false);
   const [deleteButton, setDeleteButton] = useState(false);
   const [edit, setEdit] = useState(false);
-  const [nombre, setNombre] = useState("")
-  const [texto, setTexto] = useState("")
-  const [idProject, setIdProject] = useState("")
-
+  const [nombre, setNombre] = useState("");
+  const [texto, setTexto] = useState("");
+  const [idProject, setIdProject] = useState("");
+  const [task, setTask] = useState(false);
+  const [owner, setOwner] = useState("");
 
   useEffect(() => {
     const fetchAllProjects = async () => {
@@ -57,17 +63,12 @@ const Proyects = () => {
     const name = nombre;
     const description = texto;
 
-
     try {
-      const update = await updateProject(
-        id,
-        name,
-        description
-      );
+      const update = await updateProject(id, name, description);
 
-      toast.success('Usuario editado')
+      toast.success("Usuario editado");
       setDeleteButton(!deleteButton);
-      setEdit(!edit)
+      setEdit(!edit);
       console.log("Usuario editado:", update);
 
       // Limpiar el formulario o realizar otras acciones después de crear el usuario
@@ -79,31 +80,39 @@ const Proyects = () => {
 
   return (
     <>
-      <button
-        onClick={handleNew}
-        className="fixed top-1 md:top-24 z-50 right-4 md:right-10 rounded-full bg-gray-100 p-2 shadow-2xl hover:bg-orange-100"
-      >
-        <PlusIcon />{" "}
-      </button>
-      {projects && projects.length && (
-        <div className="py-32 lg:mx-20 flex justify-center gap-10 flex-wrap">
-          {projects &&
-            projects.map((el, idx) => {
-              return (
-                <ProjectCard
-                  key={idx}
-                  {...el}
-                  deleteButton={deleteButton}
-                  setDeleteButton={setDeleteButton}
-                  edit={edit}
-                  setEdit={setEdit}
-                  setNombre={setNombre}
-                  setTexto={setTexto}
-                  setIdProject={setIdProject}
-                />
-              );
-            })}
-        </div>
+      {task === false && (
+        <>
+          <button
+            onClick={handleNew}
+            className="fixed top-1 md:top-24 z-50 right-4 md:right-10 rounded-full bg-gray-100 p-2 shadow-2xl hover:bg-orange-100"
+          >
+            <PlusIcon />{" "}
+          </button>
+          {projects && projects.length && (
+            <div className="py-32 lg:mx-20 flex justify-center gap-10 flex-wrap">
+              {projects &&
+                projects.map((el, idx) => {
+                  return (
+                    <ProjectCard
+                      key={idx}
+                      {...el}
+                      deleteButton={deleteButton}
+                      setDeleteButton={setDeleteButton}
+                      edit={edit}
+                      setEdit={setEdit}
+                      setNombre={setNombre}
+                      setTexto={setTexto}
+                      setIdProject={setIdProject}
+                      setOwner={setOwner}
+                      owner={owner}
+                      setTask={setTask}
+                      task = {task}
+                    />
+                  );
+                })}
+            </div>
+          )}
+        </>
       )}
 
       {newButton === true && (
@@ -165,7 +174,10 @@ const Proyects = () => {
         <>
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div className="relative md:w-96 w-3/4 flex justify-center items-center py-10 bg-amber-400 rounded-3xl shadow-lg">
-              <form onSubmit={handleSubmitEdit} className="max-w-sm mx-auto w-3/4">
+              <form
+                onSubmit={handleSubmitEdit}
+                className="max-w-sm mx-auto w-3/4"
+              >
                 <div className="mb-5">
                   <label
                     htmlFor="name"
@@ -177,7 +189,9 @@ const Proyects = () => {
                     type="text"
                     id="name"
                     defaultValue={nombre}
-                    onChange={(e)=>{setNombre(e.target.value)}}
+                    onChange={(e) => {
+                      setNombre(e.target.value);
+                    }}
                     className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                     required
                   />
@@ -192,7 +206,9 @@ const Proyects = () => {
                   <input
                     type="text"
                     id="description"
-                    onChange={(e)=>{setTexto(e.target.value)}}
+                    onChange={(e) => {
+                      setTexto(e.target.value);
+                    }}
                     defaultValue={texto}
                     className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                     required
@@ -219,6 +235,8 @@ const Proyects = () => {
           </div>
         </>
       )}
+
+      {task === true && <Task />}
     </>
   );
 };

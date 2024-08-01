@@ -4,7 +4,6 @@ import toast from "react-hot-toast";
 import { deleteProject } from "../../services/project.service";
 
 const ProjectCard = ({
-  project,
   id,
   description,
   name,
@@ -16,17 +15,17 @@ const ProjectCard = ({
   setTexto,
   setNombre,
   setIdProject,
+  setOwner,
+  owner,
+  setTask,
+  task
 }) => {
-  const [owner, setOwner] = useState("");
-  const [data, setData] = useState("");
 
   useEffect(() => {
     const getOwner = async (id) => {
       const data = await getUserById(id);
-      setOwner(data);
+      setOwner(data.name);
     };
-
-    setData(project);
 
     getOwner(owner_id);
   }, []);
@@ -37,6 +36,13 @@ const ProjectCard = ({
     setIdProject(id);
     setEdit(!edit);
   };
+
+  const handleOpen = () => {
+    setTexto(description);
+    setNombre(name);
+    setIdProject(id);
+    setTask(!task)
+  }
 
   const handleDelete = async (event) => {
     event.preventDefault();
@@ -120,7 +126,7 @@ const ProjectCard = ({
 
         <div className="row-start-1 col-start-1">
           <h1 className="text-3xl">{name}</h1>
-          <h3 className="font-bold">{owner.name}</h3>
+          <h3 className="font-bold">{owner}</h3>
         </div>
         <p className="row-start-3 col-span-2 overflow-y-auto max-h-20 scrollbar-hide custom-scrollbar">
           {description}
@@ -129,7 +135,7 @@ const ProjectCard = ({
         <div className="flex flex-col gap-4 w-60 row-start-4 mt-5">
           <button
             type="button"
-            onClick={handleDelete}
+            onClick={handleOpen}
             className="text-white w-full bg-amber-500 hover:bg-amber-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Abrir
