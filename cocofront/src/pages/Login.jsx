@@ -41,7 +41,7 @@ const Login = () => {
         </div>
 
         <div className="flex justify-center lg:justify-start lg:ml-10 items-center pt-10 lg:pt-0">
-          <div className="md:w-96 w-3/4 flex justify-center items-center py-10 bg-yellow-300 md:h-2/3 rounded-3xl shadow-lg">
+          <div className="md:w-96 w-3/4 flex justify-center items-center py-10 bg-amber-400 rounded-3xl shadow-lg">
             <form className="max-w-sm mx-auto w-3/4" onSubmit={handleLogin}>
               <div className="mb-5">
                 <label
