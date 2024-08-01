@@ -15,8 +15,6 @@ export const signup = async (name, email, password) => {
 };
 
 export const login = async (email, password) => {
-  console.log(email)
-  console.log(password)
    try {
       const { data } = await app.post('/auth/login', {
         email,

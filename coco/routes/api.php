@@ -54,8 +54,10 @@ Route::group([
     Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
     Route::post('me', 'App\Http\Controllers\AuthController@me');
     Route::post('registrer', 'App\Http\Controllers\AuthController@registrer');
+    Route::get('user', 'App\Http\Controllers\AuthController@getUserByToken');
 
 });
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

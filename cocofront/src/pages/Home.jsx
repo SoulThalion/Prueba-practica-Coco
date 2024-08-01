@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center h-screen text-white" style={{ backgroundColor: "#1c1d20" }}>
+      <div className="flex justify-center items-center h-screen">
         <h1 className="text-4xl text-center mb-4">Bienvenido {user?.name}</h1>
       </div>
     </>

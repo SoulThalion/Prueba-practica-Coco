@@ -119,9 +119,9 @@ export const getUserByToken = async () => {
     const token = localStorage.getItem('token');
   
     try {
-      const { data } = await app.get('/user/token', {
+      const { data } = await app.get('auth/user', {
         headers: {
-          token: token,
+          Authorization: `Bearer ${token}`,
         },
       })
       return data.user

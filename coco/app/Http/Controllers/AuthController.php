@@ -33,7 +33,9 @@ class AuthController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return $this->respondWithToken($token);
+        $user = auth()->user();
+
+        return $this->respondWithToken($token, $user);
     }
 
     public function registrer(Request $request)
@@ -60,6 +62,30 @@ class AuthController extends Controller
 
         return $this->respondWithToken($token);
     }
+
+    public function getUserByToken(Request $request)
+    {
+        try {
+            // Obtener el usuario autenticado
+            $user = Auth::user();
+            
+            if (!$user) {
+                return response()->json(['error' => 'User not found'], 404);
+            }
+
+            // Convertir el usuario a JSON y eliminar la contraseña
+            $userArray = $user->toArray();
+            unset($userArray['password']);
+
+            return response()->json(['user' => $userArray], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error searching user',
+                'description' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
 
     /**
      * Get the authenticated User.
@@ -100,12 +126,15 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithToken($token)
+    protected function respondWithToken($token, $user)
     {
+        $user->makeHidden('password', 'created_at', 'updated_at', 'email_verified_at');
+
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user' => $user
         ]);
     }
 }
