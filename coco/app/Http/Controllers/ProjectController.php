@@ -17,6 +17,7 @@ class ProjectController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
+            'owner_id' => 'required|integer'
         ]);
 
         $project = Project::create($request->all());

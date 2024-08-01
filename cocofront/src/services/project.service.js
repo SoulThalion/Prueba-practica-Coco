@@ -16,14 +16,14 @@ console.log(data)
     }
 }
 
-export const createOrder = async (work, shipId, clientId) => {
+export const createProject = async (name, description, owner_id) => {
     const token = localStorage.getItem('token');
 
     try {
-        const { data } = await app.post('/order', {
-            work: work,
-            shipId: shipId,
-            clientId: clientId
+        const { data } = await app.post('/projects', {
+            name: name,
+            description: description,
+            owner_id: owner_id
         }, {
             headers: {
                 Authorization: `Bearer ${token}`
