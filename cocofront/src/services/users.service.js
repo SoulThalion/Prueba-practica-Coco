@@ -117,7 +117,7 @@ export const getUserById = async (id) => {
 
 export const getUserByToken = async () => {
     const token = localStorage.getItem('token');
-  
+      
     try {
       const { data } = await app.get('auth/user', {
         headers: {
@@ -127,6 +127,11 @@ export const getUserByToken = async () => {
       return data.user
   
     } catch (error) {
-      console.log('Error getting user data: ', error.message)
+        if (error.response && error.response.status === 401) {
+            console.log('Token expirado. Cerrando sesión...');
+            localStorage.removeItem('token')
+        } else {
+            console.log('Error getting user data: ', error.message);
+        }
     }
   }

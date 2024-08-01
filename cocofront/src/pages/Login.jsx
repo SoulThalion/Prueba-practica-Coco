@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/userContext";
-import { login, signup } from "../services/auth.service";
+import { login } from "../services/auth.service";
 import OpenEyeIcon from "../icons/OpenEyeIcon";
 import CloseEyeIcon from "../icons/CloseEyeIcon";
 import logo from "../assets/logo_4.png";
