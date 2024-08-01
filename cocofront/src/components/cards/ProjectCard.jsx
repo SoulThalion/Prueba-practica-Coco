@@ -15,7 +15,7 @@ const ProjectCard = ({
   setEdit,
   setTexto,
   setNombre,
-  setIdProject
+  setIdProject,
 }) => {
   const [owner, setOwner] = useState("");
   const [data, setData] = useState("");
@@ -32,9 +32,9 @@ const ProjectCard = ({
   }, []);
 
   const handleEditButton = () => {
-    setTexto(description)
-    setNombre(name)
-    setIdProject(id)
+    setTexto(description);
+    setNombre(name);
+    setIdProject(id);
     setEdit(!edit);
   };
 
@@ -122,15 +122,23 @@ const ProjectCard = ({
           <h1 className="text-3xl">{name}</h1>
           <h3 className="font-bold">{owner.name}</h3>
         </div>
-        <p className="row-start-3 col-span-2 overflow-y-auto max-h-32 scrollbar-hide custom-scrollbar">
+        <p className="row-start-3 col-span-2 overflow-y-auto max-h-20 scrollbar-hide custom-scrollbar">
           {description}
         </p>
 
-        <div className="flex gap-4 w-60 row-start-4 mt-5">
+        <div className="flex flex-col gap-4 w-60 row-start-4 mt-5">
+          <button
+            type="button"
+            onClick={handleDelete}
+            className="text-white w-full bg-amber-500 hover:bg-amber-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Abrir
+          </button>
+
           <button
             type="submit"
             onClick={handleEditButton}
-            className="text-white w-1/2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Editar
           </button>
@@ -138,7 +146,7 @@ const ProjectCard = ({
           <button
             type="button"
             onClick={handleDelete}
-            className="text-blue-700 w-1/2 bg-white hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-blue-700 w-full bg-white hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Borrar
           </button>

@@ -81,12 +81,12 @@ const Proyects = () => {
     <>
       <button
         onClick={handleNew}
-        className="fixed top-24 right-10 rounded-full bg-gray-100 p-2 shadow-2xl hover:bg-orange-100"
+        className="fixed top-1 md:top-24 z-50 right-4 md:right-10 rounded-full bg-gray-100 p-2 shadow-2xl hover:bg-orange-100"
       >
         <PlusIcon />{" "}
       </button>
       {projects && projects.length && (
-        <div className="pt-32 lg:mx-20 flex justify-center gap-10 flex-wrap">
+        <div className="py-32 lg:mx-20 flex justify-center gap-10 flex-wrap">
           {projects &&
             projects.map((el, idx) => {
               return (
