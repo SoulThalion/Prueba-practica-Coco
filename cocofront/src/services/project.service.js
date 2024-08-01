@@ -80,22 +80,22 @@ export const updateOrder = async (id, appointment, work, hours, finish, shipId, 
 };
 
 
-export const deleteOrder = async (id) => {
+export const deleteProject = async (id) => {
     const token = localStorage.getItem('token');
     console.log(id)
     const ide = id
     try {
-        await app.delete(`/order/${ide}`, {
+        await app.delete(`/projects/${ide}`, {
             headers: {
-                token: token // Incluir el token en el encabezado de autorización
+                Authorization: `Bearer ${token}`
             }
         });
 
 
-        return "Order deleted"
+        return "Project deleted"
 
     } catch (error) {
-        console.error('Error al borrar el orden:', error);
+        console.error('Error al borrar el proyecto:', error);
         throw error; // Propagar el error para que pueda ser manejado por el código que llama a esta función
     }
 };

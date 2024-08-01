@@ -10,6 +10,8 @@ const Proyects = () => {
   const { user } = useContext(UserContext);
   const [projects, setProjects] = useState("");
   const [newButton, setNewButton] = useState(false);
+  const [deleteButton, setDeleteButton] = useState(false);
+  console.log(deleteButton)
 
   useEffect(() => {
     const fetchAllProjects = async () => {
@@ -18,7 +20,7 @@ const Proyects = () => {
     };
 
     fetchAllProjects();
-  }, [newButton]);
+  }, [newButton, deleteButton]);
 
   const handleNew = () => {
     setNewButton(!newButton);
@@ -52,7 +54,7 @@ const Proyects = () => {
         <div className="pt-32 lg:mx-20 flex justify-center gap-10 flex-wrap">
           {projects &&
             projects.map((el, idx) => {
-              return <ProjectCard key={idx} {...el} />;
+              return <ProjectCard key={idx} {...el} deleteButton={deleteButton} setDeleteButton={setDeleteButton}/>;
             })}
         </div>
       )}
