@@ -1,14 +1,14 @@
 import app from './config'
 
-export const getAllOrders = async () => {
+export const getAllProjects = async () => {
     const token = localStorage.getItem('token');
     try {
-        const { data } = await app.get('/order', {
+        const { data } = await app.get('/projects', {
             headers: {
-                token: token
+                Authorization: `Bearer ${token}`
             }
         })
-
+console.log(data)
         return data
 
     } catch (error) {
@@ -20,22 +20,21 @@ export const createOrder = async (work, shipId, clientId) => {
     const token = localStorage.getItem('token');
 
     try {
-        // Realizar la solicitud POST para crear un nuevo usuario
         const { data } = await app.post('/order', {
             work: work,
             shipId: shipId,
             clientId: clientId
         }, {
             headers: {
-                token: token // Incluir el token en el encabezado de autorización
+                Authorization: `Bearer ${token}`
             }
         });
 
-        return data; // Devolver los datos del nuevo cliente creado
+        return data;
 
     } catch (error) {
         console.error('Error al crear el cliente:', error);
-        throw error; // Propagar el error para que pueda ser manejado por el código que llama a esta función
+        throw error;
     }
 };
 

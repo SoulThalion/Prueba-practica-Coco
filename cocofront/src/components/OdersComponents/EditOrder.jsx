@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { updateOrder } from "../../services/orders.service";
+import { updateOrder } from "../../services/project.service";
 import { useState, useEffect } from "react";
 import { getShipsByClientId, getShipById } from "../../services/ship.service";
 import { useContext } from "react";

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { createOrder } from "../../services/orders.service";
+import { createOrder } from "../../services/project.service";
 import { useState, useEffect } from "react";
 import { getShipsByClientId } from "../../services/ship.service";
 import toast from "react-hot-toast";

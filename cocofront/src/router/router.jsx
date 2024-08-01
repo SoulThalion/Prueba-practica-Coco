@@ -4,7 +4,7 @@ import Login from '../pages/Login'
 import Home from "../pages/Home";
 import Users from "../pages/Users";
 import Clients from "../pages/Clients";
-import Orders from "../pages/Orders";
+import Proyects from "../pages/Proyects";
 import Landing from "../pages/Landing";
 import Register from "../pages/Register";
 
@@ -48,8 +48,8 @@ const router = createBrowserRouter([
         loader: isAuthenticated,
       },
       {
-        path: '/orders',
-        element: <Orders/>,
+        path: '/proyectos',
+        element: <Proyects/>,
         loader: isAuthenticated,
       },
 ]}

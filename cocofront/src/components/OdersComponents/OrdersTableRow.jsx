@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import EditIcon from "../../icons/EditIcon";
 import DeleteIcon from "../../icons/DeleteIcon";
 import DocumentIcon from "../../icons/DocumentIcon";
-import { deleteOrder } from "../../services/orders.service";
+import { deleteOrder } from "../../services/project.service";
 import { getClientById } from "../../services/clients.service";
 import { useEffect, useState } from "react";
 import { useContext } from "react";

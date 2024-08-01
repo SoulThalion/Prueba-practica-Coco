@@ -4,7 +4,7 @@ import ExitIcon from "../icons/ExitIcon";
 import MenuIcon from "../icons/MenuIcon";
 import ClientsButton from "./buttons/ClientsButton";
 import LogOutButton from "./buttons/LogOutButton";
-import OrdersButton from "./buttons/OrdersButton";
+import OrdersButton from "./buttons/ProyectsButton";
 import UsersButton from "./buttons/UsersButton";
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
@@ -26,7 +26,7 @@ const Navbar = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start rtl:justify-end">
               <button
-                className=" mt-0 hover:bg-blue-100 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none"
+                className=" mt-0 hover:bg-orange-100 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none"
                 type="button"
                 onClick={() => setIsDrawerOpen(!isDrawerOpen)} // Alternar visibilidad del drawer
                 aria-controls="drawer-navigation"
@@ -47,7 +47,7 @@ const Navbar = () => {
       {/* Menus */}
       <div
         id="drawer-navigation"
-        className={`fixed mt-4 top-12 left-0 z-40 w-64 h-screen shadow-2xl p-4 overflow-y-auto transition-transform ${
+        className={`fixed mt-4 top-12 left-0 z-50 w-64 h-screen bg-white shadow-2xl p-4 overflow-y-auto transition-transform ${
           isDrawerOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         tabIndex="-1"
