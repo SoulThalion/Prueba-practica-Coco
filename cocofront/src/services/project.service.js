@@ -8,7 +8,7 @@ export const getAllProjects = async () => {
                 Authorization: `Bearer ${token}`
             }
         })
-console.log(data)
+        console.log(data)
         return data
 
     } catch (error) {
@@ -38,36 +38,16 @@ export const createProject = async (name, description, owner_id) => {
     }
 };
 
-export const updateOrder = async (id, appointment, work, hours, finish, shipId, userId, observations) => {
+export const updateProject = async (id, name, description) => {
     const token = localStorage.getItem('token');
 
     try {
-        // Realizar la solicitud PATCH para editar una orden
-        const userData = {
-            work: work,
-            hours: hours,
-            finish: finish,
-            shipId: shipId,
-        };
-
-        // Incluir appointment en userData solo si no es un valor vacío
-        if (appointment.trim() !== "") {
-            userData.appointment = appointment;
-        }
-
-        // Incluir userId en userData solo si no es un valor vacío
-        if (userId.trim() !== "") {
-            userData.userId = userId;
-        }
-
-        // Incluir observations en userData solo si no es un valor vacío
-        if (observations.trim() !== "") {
-            userData.observations = observations;
-        }
-
-        const { data } = await app.patch(`/order/${id}`, userData, {
+        const { data } = await app.patch(`/projects/${id}`, {
+            name,
+            description
+        }, {
             headers: {
-                token: token // Incluir el token en el encabezado de autorización
+                Authorization: `Bearer ${token}`
             }
         });
 

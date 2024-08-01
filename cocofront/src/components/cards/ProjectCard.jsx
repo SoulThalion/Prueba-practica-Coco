@@ -3,10 +3,22 @@ import { getUserById } from "../../services/users.service";
 import toast from "react-hot-toast";
 import { deleteProject } from "../../services/project.service";
 
-const ProjectCard = ({project, id, description, name, owner_id, deleteButton, setDeleteButton}) => {
+const ProjectCard = ({
+  project,
+  id,
+  description,
+  name,
+  owner_id,
+  deleteButton,
+  setDeleteButton,
+  edit,
+  setEdit,
+  setTexto,
+  setNombre,
+  setIdProject
+}) => {
   const [owner, setOwner] = useState("");
   const [data, setData] = useState("");
-  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     const getOwner = async (id) => {
@@ -19,6 +31,13 @@ const ProjectCard = ({project, id, description, name, owner_id, deleteButton, se
     getOwner(owner_id);
   }, []);
 
+  const handleEditButton = () => {
+    setTexto(description)
+    setNombre(name)
+    setIdProject(id)
+    setEdit(!edit);
+  };
+
   const handleDelete = async (event) => {
     event.preventDefault();
 
@@ -29,7 +48,7 @@ const ProjectCard = ({project, id, description, name, owner_id, deleteButton, se
         const handleConfirm = () => {
           resolve(true);
           toast.dismiss(); // Cierra el toast al confirmar
-          toast.success('Proyecto eliminado')
+          toast.success("Proyecto eliminado");
         };
         // Resuelve la promesa con false cuando se pulsa Cancelar
         const handleCancel = () => {
@@ -107,42 +126,23 @@ const ProjectCard = ({project, id, description, name, owner_id, deleteButton, se
           {description}
         </p>
 
-        {edit === false && (
-          <div className="flex gap-4 w-60 row-start-4 mt-5">
-            <button
-              type="submit"
-              className="text-white w-1/2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Editar
-            </button>
+        <div className="flex gap-4 w-60 row-start-4 mt-5">
+          <button
+            type="submit"
+            onClick={handleEditButton}
+            className="text-white w-1/2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Editar
+          </button>
 
-            <button
-              type="button"
-              onClick={handleDelete}
-              className="text-blue-700 w-1/2 bg-white hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Borrar
-            </button>
-          </div>
-        )}
-
-        {edit === true && (
-          <div className="flex gap-4 w-60 row-start-4 mt-5">
-            <button
-              type="submit"
-              className="text-white w-1/2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Guardar
-            </button>
-
-            <button
-              type="button"
-              className="text-blue-700 w-1/2 bg-white hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Cancelar
-            </button>
-          </div>
-        )}
+          <button
+            type="button"
+            onClick={handleDelete}
+            className="text-blue-700 w-1/2 bg-white hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Borrar
+          </button>
+        </div>
       </div>
     </>
   );
