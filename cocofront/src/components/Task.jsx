@@ -218,6 +218,8 @@ Task.propTypes = {
   owner: PropTypes.string,
   texto: PropTypes.string,
   idProject: PropTypes.integer,
+  task: PropTypes.bool,
+  setTask: PropTypes.func,
 };
 
 export default Task;
