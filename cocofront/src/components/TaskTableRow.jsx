@@ -268,6 +268,9 @@ const TaskTableRow = ({ task, reload, setReload, devNames }) => {
 
 TaskTableRow.propTypes = {
   task: PropTypes.object,
+  reload: PropTypes.bool,
+  setReload: PropTypes.func,
+  devNames: PropTypes.array
 };
 
 export default TaskTableRow;

@@ -2,15 +2,12 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import MenuIcon from "../icons/MenuIcon";
 import LogOutButton from "./buttons/LogOutButton";
-import { useContext } from "react";
-import { UserContext } from "../context/userContext";
 import logo from "../assets/logo_4.png";
 import ProjectsButton from "./buttons/ProjectsButton";
 
 const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const location = useLocation();
-  const { user } = useContext(UserContext);
 
   useEffect(() => {
     setIsDrawerOpen(false); // Cerrar el drawer cada vez que cambia la ruta

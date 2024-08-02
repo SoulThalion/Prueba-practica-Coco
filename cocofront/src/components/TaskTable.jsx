@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
 import TaskTableRow from "./TaskTableRow";
 import PlusTaskIcon from "../icons/PlusTaskIcon";
-import { useEffect, useState } from "react";
-import { getAllUsers } from "../services/users.service";
 import { createTask } from "../services/task.service";
 import toast from "react-hot-toast";
 
@@ -186,6 +184,12 @@ const TaskTable = ({ tasks, idProject, reload, setReload, newButton, setNewButto
 
 TaskTable.propTypes = {
   tasks: PropTypes.object,
+  idProject: PropTypes.integer,
+  reload: PropTypes.bool,
+  setReload: PropTypes.func,
+  newButton: PropTypes.bool,
+  setNewButton: PropTypes.func,
+  devNames: PropTypes.array
 };
 
 export default TaskTable;
