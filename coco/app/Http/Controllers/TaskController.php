@@ -24,7 +24,8 @@ class TaskController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'project_id' => 'required|exists:projects,id',
-            'user_id' => 'required|exists:users,id',
+            'assigned_to' => 'required|integer',
+            'due_date' => 'required|date',
         ]);
 
         $task = Task::create($request->all());

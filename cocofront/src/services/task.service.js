@@ -8,7 +8,7 @@ export const getAllTasks = async (id) => {
                 Authorization: `Bearer ${token}`
             }
         })
-        console.log(data)
+        
         return data
 
     } catch (error) {
@@ -16,14 +16,16 @@ export const getAllTasks = async (id) => {
     }
 }
 
-export const createTask = async (name, description, owner_id) => {
+export const createTask = async (title, description, due_date, assigned_to, project_id) => {
     const token = localStorage.getItem('token');
 
     try {
         const { data } = await app.post('/tasks', {
-            name: name,
+            title: title,
             description: description,
-            owner_id: owner_id
+            due_date: due_date,
+            assigned_to: assigned_to,
+            project_id: project_id
         }, {
             headers: {
                 Authorization: `Bearer ${token}`

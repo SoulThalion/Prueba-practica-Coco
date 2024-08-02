@@ -6,6 +6,7 @@ const TaskTableRow = ({task}) => {
 
     const [dev, setDev] = useState("");
 
+
     useEffect(() => {
       const getDeveloper = async (id) => {
         const data = await getUserById(id);
@@ -22,6 +23,7 @@ const TaskTableRow = ({task}) => {
       <td className="px-6 py-4">{task.status}</td>
       <td className="px-6 py-4">{task.due_date}</td>
       <td className="px-6 py-4">{dev}</td>
+
     </>
   );
 };

@@ -106,7 +106,7 @@ const Proyects = () => {
                       setOwner={setOwner}
                       owner={owner}
                       setTask={setTask}
-                      task = {task}
+                      task={task}
                     />
                   );
                 })}
@@ -236,7 +236,16 @@ const Proyects = () => {
         </>
       )}
 
-      {task === true && <Task nombre={nombre} texto={texto} owner={owner} idProject={idProject}/>}
+      {task === true && (
+        <Task
+          nombre={nombre}
+          texto={texto}
+          owner={owner}
+          idProject={idProject}
+          task = {task}
+          setTask = {setTask}
+        />
+      )}
     </>
   );
 };
