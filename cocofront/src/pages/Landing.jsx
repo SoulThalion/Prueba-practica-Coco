@@ -33,13 +33,13 @@ const Landing = () => {
           </p>
           <button
             onClick={handleClickRegister}
-            className="bg-orange-400 rounded-lg w-full h-12 text-xl"
+            className="bg-amber-400 rounded-lg w-full h-12 text-xl"
           >
             ¡Registrate!
           </button>
         </div>
 
-        <div className="bg-[#40c057] rounded-3xl flex flex-col justify-center items-center lg:w-2/3 m-5 lg:m-0 p-10 gap-10 shadow-lg">
+        <div className="bg-orange-400 rounded-3xl flex flex-col justify-center items-center lg:w-2/3 m-5 lg:m-0 p-10 gap-10 shadow-lg">
           <p className="text-white text-xl font-bold">
             Continúa dónde lo dejaste, ponte al día y comunícate con tus
             compañeros/as, o crea nuevos proyectos.

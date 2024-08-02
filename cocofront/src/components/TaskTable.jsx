@@ -53,7 +53,7 @@ const TaskTable = ({ tasks, idProject, reload, setReload, newButton, setNewButto
       {tasks && tasks.length && (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg overflow-y-auto max-h-80 scrollbar-hide custom-scrollbar">
           <table className="w-full text-sm text-left rtl:text-right text-gray-600 dark:text-gray-400 ">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-yellow-300 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3">
                   Id

@@ -63,19 +63,19 @@ const Task = ({ nombre, texto, owner, idProject, task, setTask }) => {
     <>
       {tasks && tasks.length && (
         <div className="flex flex-col justify-center items-center pt-24">
-          <div className="px-32 grid bg-gray-200 mx-32 rounded-2xl py-20">
+          <div className="px-32 grid bg-blue-500 mx-32 rounded-2xl py-20">
             <button
               onClick={handleClose}
               className="row-start-1 col-start-2 -mt-10 -mr-10"
             >
               <ExitIcon />{" "}
             </button>
-            <span className="text-right row-start-2 col-start-2 mt-4">
+            <span className="text-right row-start-2 col-start-2 mt-4 text-white">
               {idProject}
             </span>
-            <h1 className="text-5xl font-semibold row-start-2">{nombre}</h1>
-            <h3 className="text-2xl row-start-3 pb-2">{owner}</h3>
-            <p className="row-start-4">{texto}</p>
+            <h1 className="text-5xl font-semibold row-start-2 text-amber-300">{nombre}</h1>
+            <h3 className="text-2xl row-start-3 pb-2 text-white">{owner}</h3>
+            <p className="row-start-4 text-white">{texto}</p>
             <div className="row-start-5 pt-10">
               <TaskTable
                 tasks={tasks}
