@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getUserById } from "../../services/users.service";
 import toast from "react-hot-toast";
 import { deleteProject } from "../../services/project.service";
+import PropTypes from "prop-types";
 
 const ProjectCard = ({
   id,
@@ -18,9 +19,8 @@ const ProjectCard = ({
   setOwner,
   owner,
   setTask,
-  task
+  task,
 }) => {
-
   useEffect(() => {
     const getOwner = async (id) => {
       const data = await getUserById(id);
@@ -41,8 +41,8 @@ const ProjectCard = ({
     setTexto(description);
     setNombre(name);
     setIdProject(id);
-    setTask(!task)
-  }
+    setTask(!task);
+  };
 
   const handleDelete = async (event) => {
     event.preventDefault();
@@ -160,6 +160,24 @@ const ProjectCard = ({
       </div>
     </>
   );
+};
+
+ProjectCard.propTypes = {
+  id: PropTypes.integer,
+  description: PropTypes.string,
+  name: PropTypes.string,
+  owner_id: PropTypes.intenger,
+  deleteButton: PropTypes.func,
+  setDeleteButton: PropTypes.func,
+  edit: PropTypes.bool,
+  setEdit: PropTypes.func,
+  setTexto: PropTypes.func,
+  setNombre: PropTypes.func,
+  setIdProject: PropTypes.func,
+  setOwner: PropTypes.func,
+  owner: PropTypes.string,
+  setTask: PropTypes.func,
+  task: PropTypes.bool,
 };
 
 export default ProjectCard;

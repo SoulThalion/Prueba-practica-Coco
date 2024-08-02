@@ -3,7 +3,7 @@ import app from './config'
 export const getAllUsers = async () => {
     const token = localStorage.getItem('token');
     try {
-        const { data } = await app.get('/user', {
+        const { data } = await app.get('/users', {
             headers: {
                 token: token
             }
@@ -21,7 +21,7 @@ export const createUser = async (userName, name, surName, telephone, email, pass
 
     try {
         // Realizar la solicitud POST para crear un nuevo usuario
-        const { data } = await app.post('/user', {
+        const { data } = await app.post('/users', {
             userName: userName,
             name: name,
             surName: surName,
@@ -62,7 +62,7 @@ export const updateUser = async (id, userName, name, surName, telephone, email, 
             userData.password = password;
         }
     
-        const { data } = await app.patch(`/user/${id}`, userData, {
+        const { data } = await app.patch(`/users/${id}`, userData, {
             headers: {
                 token: token // Incluir el token en el encabezado de autorización
             }
@@ -81,7 +81,7 @@ export const deleteUser = async (id) => {
     console.log(id)
     const ide= id
     try {   
-        await app.delete(`/user/${ide}`, {
+        await app.delete(`/users/${ide}`, {
             headers: {
                 token: token // Incluir el token en el encabezado de autorización
             }

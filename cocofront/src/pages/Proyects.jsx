@@ -236,7 +236,7 @@ const Proyects = () => {
         </>
       )}
 
-      {task === true && <Task />}
+      {task === true && <Task nombre={nombre} texto={texto} owner={owner} idProject={idProject}/>}
     </>
   );
 };

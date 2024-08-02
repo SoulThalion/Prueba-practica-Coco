@@ -12,6 +12,12 @@ class TaskController extends Controller
         return Task::all();
     }
 
+    public function getTasks($project_id)
+    {
+
+        return Task::where('project_id', $project_id)->get();
+    }
+
     public function store(Request $request)
     {
         $request->validate([
