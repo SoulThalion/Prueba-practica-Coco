@@ -1,2 +1,0 @@
-web: cd back && vendor/bin/heroku-php-apache2 public/
-frontend: cd front && npm install && npm run build

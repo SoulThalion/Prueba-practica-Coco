@@ -1,0 +1,13 @@
+{
+    "name": "my-project",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+      "cocofront"
+    ],
+    "engines": {
+      "node": "16.x",
+      "npm": "7.x"
+    }
+  }
+  
