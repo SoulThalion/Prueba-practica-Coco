@@ -121,7 +121,7 @@ const ProjectCard = ({
 
   return (
     <>
-      <div className="p-5 px-10 w-80 rounded-3xl bg-orange-300 grid grid-rows-[auto,auto,1fr] gap-1">
+      <div className="p-5 px-10 w-80 rounded-3xl bg-amber-300 grid grid-rows-[auto,auto,1fr] gap-1">
         <span className="justify-self-end row-start-1">{id}</span>
 
         <div className="row-start-1 col-start-1">

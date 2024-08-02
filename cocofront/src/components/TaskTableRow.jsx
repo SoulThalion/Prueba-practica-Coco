@@ -9,6 +9,7 @@ import { deleteTask, updateTask } from "../services/task.service";
 const TaskTableRow = ({ task, reload, setReload, devNames }) => {
   const [dev, setDev] = useState([]);
   const [openEdit, setOpenEdit] = useState(false);
+  const [status, setStatus] = useState("");
 
   const handleOpenEdit = () => {
     setOpenEdit(!openEdit);
@@ -95,6 +96,14 @@ const TaskTableRow = ({ task, reload, setReload, devNames }) => {
       setDev(data);
     };
 
+    task.status === "in_progress"
+      ? setStatus("En progreso")
+      : task.status === "pending"
+      ? setStatus("Pendiente")
+      : task.status === "completed"
+      ? setStatus("Finalizado")
+      : "";
+
     getDevelopers();
   }, [reload]);
 
@@ -111,7 +120,7 @@ const TaskTableRow = ({ task, reload, setReload, devNames }) => {
     const description = event.target.description.value;
     const due_date = event.target.fecha.value;
     const assigned_to = event.target.dev.value;
-    const id = task.id
+    const id = task.id;
 
     try {
       await updateTask(title, description, due_date, assigned_to, id);
@@ -129,7 +138,7 @@ const TaskTableRow = ({ task, reload, setReload, devNames }) => {
       <td className="px-6 py-1 max-w-xs">
         <div className="max-h-5 overflow-y-auto">{task.description}</div>{" "}
       </td>
-      <td className="px-6 py-1">{task.status}</td>
+      <td className="px-6 py-1">{status}</td>
       <td className="px-6 py-1">{task.due_date}</td>
       <td className="px-6 py-1">{dev.name}</td>
       <td>
@@ -209,8 +218,26 @@ const TaskTableRow = ({ task, reload, setReload, devNames }) => {
                     defaultValue={dev.id}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   >
-                    
                     {devs}
+                  </select>
+                </div>
+
+                <div className="mb-5">
+                  <label
+                    htmlFor="dev"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Estado
+                  </label>
+                  <select
+                    id="status"
+                    name="status"
+                    defaultValue={status}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  >
+                    <option>Pendiente</option>
+                    <option>En progreso</option>
+                    <option>Finalizado</option>
                   </select>
                 </div>
 
