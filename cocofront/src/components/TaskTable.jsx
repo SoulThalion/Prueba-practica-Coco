@@ -54,7 +54,7 @@ const TaskTable = ({ tasks, idProject, reload, setReload }) => {
       >
         {task.id}
       </th>
-      <TaskTableRow task={task} />
+      <TaskTableRow task={task} reload={reload} setReload={setReload}/>
     </tr>
   ));
 
@@ -87,6 +87,7 @@ const TaskTable = ({ tasks, idProject, reload, setReload }) => {
                 <th scope="col" className="px-6 py-3">
                   Desarrollador
                 </th>
+                <th></th>
                 <th
                   scope="col"
                   className="px-2 py-2 bg-gray-100 flex justify-center items-center"

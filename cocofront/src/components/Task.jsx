@@ -8,7 +8,6 @@ const Task = ({ nombre, texto, owner, idProject, task, setTask }) => {
   const [tasks, setTasks] = useState([]);
   const [reload, setReload] =useState(false)
 
-
   const handleClose = ()=>{
     setTask(!task)
   }
@@ -20,7 +19,7 @@ const Task = ({ nombre, texto, owner, idProject, task, setTask }) => {
     };
 
     getTasks(idProject)
-  }, []);
+  }, [reload]);
 
   return (
     <>
