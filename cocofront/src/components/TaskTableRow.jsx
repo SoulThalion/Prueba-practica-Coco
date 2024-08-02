@@ -11,7 +11,7 @@ import SendIcon from "../icons/SendIcon";
 import { UserContext } from "../context/userContext";
 
 const TaskTableRow = ({ task, reload, setReload, devNames }) => {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [dev, setDev] = useState([]);
   const [comment, setComment] = useState([]);
   const [openEdit, setOpenEdit] = useState(false);
