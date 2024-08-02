@@ -242,8 +242,8 @@ const Proyects = () => {
           texto={texto}
           owner={owner}
           idProject={idProject}
-          task = {task}
-          setTask = {setTask}
+          task={task}
+          setTask={setTask}
         />
       )}
     </>

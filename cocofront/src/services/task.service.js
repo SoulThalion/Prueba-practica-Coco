@@ -8,7 +8,7 @@ export const getAllTasks = async (id) => {
                 Authorization: `Bearer ${token}`
             }
         })
-        
+
         return data
 
     } catch (error) {
@@ -40,13 +40,15 @@ export const createTask = async (title, description, due_date, assigned_to, proj
     }
 };
 
-export const updateTask = async (id, name, description) => {
+export const updateTask = async (title, description, due_date, assigned_to, id) => {
     const token = localStorage.getItem('token');
 
     try {
         const { data } = await app.patch(`/tasks/${id}`, {
-            name,
-            description
+            title,
+            description,
+            due_date,
+            assigned_to
         }, {
             headers: {
                 Authorization: `Bearer ${token}`

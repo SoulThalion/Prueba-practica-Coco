@@ -6,7 +6,7 @@ import ExitIcon from "../icons/ExitIcon";
 
 const Task = ({ nombre, texto, owner, idProject, task, setTask }) => {
   const [tasks, setTasks] = useState([]);
-  const [reload, setReload] =useState(false)
+  const [reload, setReload] = useState(false)
 
   const handleClose = ()=>{
     setTask(!task)

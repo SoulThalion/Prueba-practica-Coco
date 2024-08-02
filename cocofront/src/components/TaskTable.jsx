@@ -17,7 +17,7 @@ const TaskTable = ({ tasks, idProject, reload, setReload }) => {
     };
 
     getDevelopers();
-  }, []);
+  }, [reload]);
 
 
   const handleOpenNew = () => {
@@ -54,7 +54,7 @@ const TaskTable = ({ tasks, idProject, reload, setReload }) => {
       >
         {task.id}
       </th>
-      <TaskTableRow task={task} reload={reload} setReload={setReload}/>
+      <TaskTableRow task={task} reload={reload} setReload={setReload} devNames={devNames}/>
     </tr>
   ));
 
