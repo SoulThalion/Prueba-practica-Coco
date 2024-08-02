@@ -12,6 +12,12 @@ class CommentController extends Controller
         return Comment::all();
     }
 
+    public function getComments($task_id)
+    {
+
+        return Comment::where('task_id', $task_id)->get();
+    }
+
     public function store(Request $request)
     {
         $request->validate([

@@ -1,18 +1,31 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getUserById } from "../services/users.service";
 import PropTypes from "prop-types";
 import EditIcon from "../icons/EditIcon";
 import DeleteIcon from "../icons/DeleteIcon";
 import toast from "react-hot-toast";
 import { deleteTask, updateTask } from "../services/task.service";
+import CommentIcon from "../icons/CommentIcon";
+import { createComment, getAllComments } from "../services/comment.service";
+import SendIcon from "../icons/SendIcon";
+import { UserContext } from "../context/userContext";
 
 const TaskTableRow = ({ task, reload, setReload, devNames }) => {
+  const { user, setUser } = useContext(UserContext);
   const [dev, setDev] = useState([]);
+  const [comment, setComment] = useState([]);
   const [openEdit, setOpenEdit] = useState(false);
+  const [openComment, setOpenComment] = useState(false);
   const [status, setStatus] = useState("");
+  const [message, setMessage] = useState("");
 
+  console.log(devNames)
   const handleOpenEdit = () => {
     setOpenEdit(!openEdit);
+  };
+
+  const handleComment = () => {
+    setOpenComment(!openComment);
   };
 
   const handleDelete = async (event) => {
@@ -90,10 +103,42 @@ const TaskTableRow = ({ task, reload, setReload, devNames }) => {
     }
   };
 
+  const handleSubmitComment = async (event) => {
+    event.preventDefault();
+
+    const content = message;
+    const taskId = task.id;
+    const userId = user.id;
+
+    try {
+      await createComment(content, taskId, userId);
+      toast.success("Comentario añadido");
+      setReload(!reload);
+    } catch (error) {
+      console.error("Error al editar la tarea:", error);
+    }
+  };
+
+  const getDeveloperNameById = (devNames, id) => {
+    for (let i = 0; i < devNames.length; i++) {
+      if (devNames[i].id === id) {
+        return devNames[i].name;
+      }
+    }
+    return null; 
+  };
+  
+  
+
   useEffect(() => {
     const getDevelopers = async () => {
       const data = await getUserById(task.assigned_to);
       setDev(data);
+    };
+
+    const getComments = async () => {
+      const data = await getAllComments(task.id);
+      setComment(data);
     };
 
     task.status === "in_progress"
@@ -104,13 +149,23 @@ const TaskTableRow = ({ task, reload, setReload, devNames }) => {
       ? setStatus("Finalizado")
       : "";
 
+    getComments();
     getDevelopers();
   }, [reload]);
 
   const devs = devNames.map((dev) => (
     <option key={dev.id} value={dev.id}>
-      {dev.name}
+      {dev.id}
     </option>
+  ));
+
+  const comments = comment.map((text) => (
+    <>
+      <p key={text.id} value={text.id}>
+        {getDeveloperNameById(devNames, text.user_id)}: {text.content}
+      </p>{" "}
+      <br />
+    </>
   ));
 
   const handleSubmit = async (event) => {
@@ -141,9 +196,16 @@ const TaskTableRow = ({ task, reload, setReload, devNames }) => {
       <td className="px-6 py-1">{status}</td>
       <td className="px-6 py-1">{task.due_date}</td>
       <td className="px-6 py-1">{dev.name}</td>
+
+      <td>
+        <button onClick={handleComment} className="py-1 px-2">
+          <CommentIcon />
+        </button>
+      </td>
+
       <td>
         <button onClick={handleOpenEdit} className="py-1 px-2">
-          <EditIcon />{" "}
+          <EditIcon />
         </button>
       </td>
 
@@ -262,6 +324,48 @@ const TaskTableRow = ({ task, reload, setReload, devNames }) => {
           </div>
         </>
       )}
+
+      {openComment === true && (
+        <>
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="relative md:w-96 flex flex-col justify-center items-center py-5 bg-amber-400 rounded-3xl shadow-lg">
+              <div className="bg-white font-bold h-fit rounded-xl p-5 m-5 overflow-y-auto max-h-80 max-w-80 scrollbar-hide custom-scrollbar">
+                {comments.length === 0 ? "No hay comentarios" : comments}
+              </div>
+
+              <div className="flex justify-center lg:justify-start items-center pt-10 lg:pt-0">
+                <form className="w-full" onSubmit={handleSubmitComment}>
+                  <label htmlFor="content" className="sr-only"></label>
+                  <div className="flex justify-center w-80 items-center px-3 py-2 mb-5 rounded-lg bg-gray-50 dark:bg-gray-700">
+                    <textarea
+                      id="content"
+                      rows="2"
+                      className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Tu comentario..."
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                    ></textarea>
+                    <button
+                      type="submit"
+                      className="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
+                    >
+                      <SendIcon />
+                      <span className="sr-only">Enviar comentario</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <button
+                type="button"
+                onClick={handleComment}
+                className="text-blue-700 w-80  bg-white hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };
@@ -270,7 +374,7 @@ TaskTableRow.propTypes = {
   task: PropTypes.object,
   reload: PropTypes.bool,
   setReload: PropTypes.func,
-  devNames: PropTypes.array
+  devNames: PropTypes.array,
 };
 
 export default TaskTableRow;

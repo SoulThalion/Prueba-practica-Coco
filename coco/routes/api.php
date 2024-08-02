@@ -32,6 +32,7 @@ Route::patch('/tasks/{id}', [TaskController::class, 'update']);
 Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);
 
 Route::get('/comments', [CommentController::class, 'index']);
+Route::get('/comments/task/{id}', [CommentController::class, 'getComments']);
 Route::post('/comments', [CommentController::class, 'store']);
 Route::get('/comments/{id}', [CommentController::class, 'show']);
 Route::patch('/comments/{id}', [CommentController::class, 'update']);

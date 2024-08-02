@@ -74,6 +74,7 @@ const TaskTable = ({ tasks, idProject, reload, setReload, newButton, setNewButto
                   Desarrollador
                 </th>
                 <th></th>
+                <th></th>
                 <th
                   scope="col"
                   className="px-2 py-2 flex justify-center items-center"
