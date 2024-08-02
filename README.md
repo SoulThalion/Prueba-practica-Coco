@@ -1,3 +1,5 @@
+API Coco Projects
+
 <details>
 <summary><b>Project Endpoints</b></summary>
 
@@ -36,13 +38,12 @@ PATCH  | /comments/{id}    | YES   | all | Update a Comment           | `title`,
 DELETE | /comments/{id}    | YES   | all | Delete a Comment           | `params: id`                           | { message: 'Comment deleted successfully', data: `comment`}
 </details>
 
-<details>
-<summary><b>User Endpoints</b></summary>
+<details> <summary><b>User Endpoints</b></summary>
 
-METHOD | ENDPOINT          | TOKEN | ROLE | DESCRIPTION                | POST PARAMS                            | RETURNS
--------|-------------------|-------|------|----------------------------|----------------------------------------|--------------------
-
-GET    | /auth/user        | YES   | all | Get User By Token          |                                        | { message: 'User fetched successfully', data: `user`}
+METHOD | ENDPOINT         | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                                                                 | RETURNS
+-------|------------------|-------|------|--------------------|-----------------------------------------------------------------------------------|--------------------
+GET    | /user            | YES   | all | Get All Users   |                                                                             | { message: 'Users fetched successfully', data: [`user`]}
+GET    | /user/:userId    | YES   | all | Get One User    | `params: userId`                                                            | { message: 'User fetched successfully', data: [`user`]}
 </details>
 
 <details>
