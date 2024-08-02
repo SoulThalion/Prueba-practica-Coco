@@ -26,6 +26,7 @@ const TaskTableRow = ({ task, reload, setReload, devNames }) => {
 
   const handleComment = () => {
     setOpenComment(!openComment);
+    setMessage("");
   };
 
   const handleDelete = async (event) => {
@@ -114,6 +115,7 @@ const TaskTableRow = ({ task, reload, setReload, devNames }) => {
       await createComment(content, taskId, userId);
       toast.success("Comentario añadido");
       setReload(!reload);
+      setMessage("")
     } catch (error) {
       console.error("Error al editar la tarea:", error);
     }

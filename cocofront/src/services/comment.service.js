@@ -9,7 +9,7 @@ export const getAllComments = async (id) => {
             }
         })
 
-        return data
+        return data.reverse()
 
     } catch (error) {
         console.log('Error loging: ', error.message)
