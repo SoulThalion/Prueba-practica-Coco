@@ -24,7 +24,7 @@ const TaskTableRow = ({ task, reload, setReload, devNames }) => {
         const handleConfirm = () => {
           resolve(true);
           toast.dismiss(); // Cierra el toast al confirmar
-          toast.success("Proyecto eliminado");
+          toast.success("Tarea eliminada");
         };
         // Resuelve la promesa con false cuando se pulsa Cancelar
         const handleCancel = () => {
@@ -37,7 +37,7 @@ const TaskTableRow = ({ task, reload, setReload, devNames }) => {
           (t) => (
             <div className="text-center">
               <p className="text-lg">
-                ¿Estás seguro de que deseas eliminar este proyecto?
+                ¿Estás seguro de que deseas eliminar a tarea?
               </p>
               <div className="mt-4 flex justify-center">
                 <button
@@ -219,7 +219,7 @@ const TaskTableRow = ({ task, reload, setReload, devNames }) => {
                     type="submit"
                     className="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
-                    Crear tarea
+                    Guardar cambios
                   </button>
 
                   <button

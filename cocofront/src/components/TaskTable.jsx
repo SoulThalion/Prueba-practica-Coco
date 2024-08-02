@@ -6,20 +6,8 @@ import { getAllUsers } from "../services/users.service";
 import { createTask } from "../services/task.service";
 import toast from "react-hot-toast";
 
-const TaskTable = ({ tasks, idProject, reload, setReload }) => {
-  const [newButton, setNewButton] = useState(false);
-  const [devNames, setDevNames] = useState([])
-
-  useEffect(() => {
-    const getDevelopers = async () => {
-      const data = await getAllUsers();
-      setDevNames(data);
-    };
-
-    getDevelopers();
-  }, [reload]);
-
-
+const TaskTable = ({ tasks, idProject, reload, setReload, newButton, setNewButton, devNames }) => {
+  
   const handleOpenNew = () => {
     setNewButton(!newButton);
   };
