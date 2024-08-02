@@ -78,7 +78,7 @@ const TaskTable = ({ tasks, idProject, reload, setReload, newButton, setNewButto
                 <th></th>
                 <th
                   scope="col"
-                  className="px-2 py-2 bg-gray-100 flex justify-center items-center"
+                  className="px-2 py-2 flex justify-center items-center"
                 >
                   <button onClick={handleOpenNew}>
                     <PlusTaskIcon />

@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import ExitIcon from "../icons/ExitIcon";
 import MenuIcon from "../icons/MenuIcon";
-import ClientsButton from "./buttons/ClientsButton";
 import LogOutButton from "./buttons/LogOutButton";
-import OrdersButton from "./buttons/ProyectsButton";
-import UsersButton from "./buttons/UsersButton";
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
 import logo from "../assets/logo_4.png";
+import ProjectsButton from "./buttons/ProjectsButton";
 
 const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -56,13 +53,7 @@ const Navbar = () => {
         
         <div className="py-4 overflow-y-auto">
           <ul className="space-y-2 font-medium">
-            <OrdersButton />
-            {(user?.role === "Administrador" || user?.role === "manager") && (
-              <>
-                <ClientsButton />
-                <UsersButton />
-              </>
-            )}
+            <ProjectsButton />           
             <LogOutButton />
           </ul>
         </div>

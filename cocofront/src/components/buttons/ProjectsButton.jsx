@@ -1,6 +1,6 @@
 import OrderIcon from "../../icons/OrderIcon";
 
-const OrdersButton = () => {
+const ProjectsButton = () => {
   return (
     <li>
       <a
@@ -14,4 +14,4 @@ const OrdersButton = () => {
   );
 };
 
-export default OrdersButton;
+export default ProjectsButton;
